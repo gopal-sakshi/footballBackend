@@ -1,5 +1,5 @@
 var kinesis = {};
-
+const adapter = require('./kinesis-adapter');
 kinesis.clientConnect = adapter.connect;
 kinesis.batchSize = 10;
 
