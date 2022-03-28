@@ -24,16 +24,17 @@ router.get('/', function(req, res) {
 })
 
 
-/** display all players of a particular position */
-router.get('/:position', async function(req, res) {
-    var positionId = req.params.position;
+/** display all players of a particular club */
+/** it seems, this wont work... we can query only on primary keys (or) u need to create index like global secondary index to query on non-primary key columns */
+router.get('/:club', async function(req, res) {
+    var clubId = req.params.club;
 
     var params = {
-        TableName: 'fb_playersTable',
-        IndexName: 'position-index',
-        KeyConditionExpression: "position = :position23",
+        TableName: 'fb_playersTable',        
+        KeyConditionExpression: "#club = :club23",
+        ExpressionAttributeNames: { "#club": "club" },
         ExpressionAttributeValues: {
-            ":position23": "positionId"
+            ":club23": clubId
         }
     };
     
@@ -50,7 +51,7 @@ router.get('/:position', async function(req, res) {
 }) 
 
 /** add a player */
-router.post('/', function(req, res) {
+router.post('/addPlayer', function(req, res) {
     console.log('post request for player');
     //console.log(req.body);
     addPlayer(req.body);
