@@ -10,13 +10,14 @@ var app = express();
 
 
 /********************** SUB ROUTES ***********************/
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/z_index');
+var usersRouter = require('./routes/z_users');
 var playersRouter = require('./routes/players_dynamo_aws');
+var footballersRouter = require('./routes/footballers_dynamo_local');
 var playersInS3Router = require('./routes/players_s3_aws');
 var teamsRouter = require('./routes/teams_dynamo_aws');
-var squadsRouter = require('./routes/clubSquad_postgres')
-var userInputRouter = require('./routes/userInput')
+var squadsRouter = require('./routes/clubSquad_postgres');
+var userInputRouter = require('./routes/z_userInput');
 /********************** END OF SUB ROUTES ***********************/
 
 
@@ -59,15 +60,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /*************************** register sub routes ******************************/
-app.use('/', indexRouter);                          // check to see how 'view engine' works
-app.use('/users', usersRouter);                     // just another endpoint... not much use now...
+
 app.use('/playersInS3', playersInS3Router);         // AWS S3 bucket = gopal612-football-backend-acl
 // app.use('playersInS3', playersInS3Router);       // struggled 30min... because playersInS3 didnt have backslash... 
 app.use('/squads', squadsRouter);                   // fetch squads from 'football database' --- postgres local
 app.use('/players', playersRouter);                 // 'fb_playersTable' ---- AWS dynamo
 app.use('/teams', teamsRouter);                     // 'fb_teamsTable' -------- AWS dynamo
-app.use('/userInput', userInputRouter);             // submit & form... and get the response ------ WORKING
+app.use('/footballers', footballersRouter);         // 'footballers' table ----- dynamo local
 
+app.use('/userInput', userInputRouter);             // submit & form... and get the response ------ WORKING
+app.use('/', indexRouter);                          // check to see how 'view engine' works
+app.use('/users', usersRouter);                     // just another endpoint... not much use now...
 /*************************** end of register sub routes ******************************/
 
 
