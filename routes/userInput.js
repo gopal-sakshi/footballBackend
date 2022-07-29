@@ -1,12 +1,16 @@
 var express = require('express');
-var bodyParser = require('body-parser')
-
 var router = express.Router();
+var path = require("path");
 
 
 router.get('/submit', (req, res) => {
-    console.log('inside submit');
-    res.sendFile(__dirname + '/index23.html');
+    console.log('inside submit');    
+    console.log("__dirname:  ----------> ", __dirname);
+    console.log("process.cwd() --------> ", process.cwd());
+    console.log("./ -------------------> ", path.resolve("./"));
+    console.log("filename -------------> ", __filename);
+    
+    res.sendFile(path.resolve("./","resources","index23.html"));
 });
 
 router.post('/submit', (req, res) => {
