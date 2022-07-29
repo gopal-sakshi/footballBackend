@@ -2,7 +2,7 @@
   "name": "footballbackend",
   "version": "0.0.0",
   "private": true,
-  "scripts": {    
+  "scripts": {
     "start": "nodemon ./bin/www",
     "you should use START-DEV": "dont use start... use start-dev"
   },

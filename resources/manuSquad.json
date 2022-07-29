@@ -1,0 +1,168 @@
+[
+    {
+        "id": 1,
+        "player": "De Gea",
+        "position": "Goalie",
+        "country": "Spain",
+        "comments": {
+            "height": "tall",
+            "target": "winning titles"
+        },
+        "otherclubs": {
+            "spain": [
+                "atletico"
+            ],
+            "england": "man u"
+        },
+        "isactive": true
+    },
+    {
+        "id": 2,
+        "player": "varane",
+        "position": "Center Back",
+        "country": "France",
+        "comments": {
+            "height": "very tall",
+            "target": "help manu regain glory"
+        },
+        "otherclubs": {
+            "spain": [
+                "real madrid"
+            ],
+            "england": "man u"
+        },
+        "isactive": true
+    },
+    {
+        "id": 3,
+        "player": "Maguire",
+        "position": "Center Back",
+        "country": "England",
+        "comments": {
+            "height": "tall",
+            "target": "change of club"
+        },
+        "otherclubs": {
+            "spain": [],
+            "england": [
+                "manu",
+                "leicester"
+            ]
+        },
+        "isactive": true
+    },
+    {
+        "id": 4,
+        "player": "Ronaldo",
+        "position": "winger",
+        "country": "Portugal",
+        "comments": {
+            "height": "tall",
+            "target": "overtake messi"
+        },
+        "otherclubs": {
+            "italy": "juventus",
+            "spain": [
+                "real madrid"
+            ],
+            "england": "manu"
+        },
+        "isactive": true
+    },
+    {
+        "id": 5,
+        "player": "Di Maria",
+        "position": "Winger",
+        "country": "Argentina",
+        "comments": {
+            "height": "average",
+            "target": "help strikers"
+        },
+        "otherclubs": {
+            "spain": [
+                "real madrid"
+            ],
+            "france": "psg",
+            "england": "manu"
+        },
+        "isactive": false
+    },
+    {
+        "id": 6,
+        "player": "lukaku",
+        "position": "striker",
+        "country": "Belgium",
+        "comments": {
+            "height": "tall",
+            "target": "win titles"
+        },
+        "otherclubs": {
+            "england": [
+                "chelsea",
+                "everton",
+                "manu"
+            ]
+        },
+        "isactive": false
+    },
+    {
+        "id": 7,
+        "player": "pogba",
+        "position": "Midfield",
+        "country": "France",
+        "comments": {
+            "height": "tall",
+            "target": "bring his national team form at club level"
+        },
+        "otherclubs": {
+            "italy": [
+                "juventus"
+            ],
+            "england": "manu"
+        },
+        "isactive": true
+    },
+    {
+        "id": 8,
+        "player": "ibrahimovic",
+        "position": "Center Forward",
+        "country": "Sweden",
+        "comments": {
+            "height": "very tall",
+            "target": "I am ZLATAN"
+        },
+        "otherclubs": {
+            "italy": [
+                "juventus",
+                "ac milan",
+                "intermilan"
+            ],
+            "spain": [
+                "barcelona"
+            ],
+            "england": "manu"
+        },
+        "isactive": false
+    },
+    {
+        "id": 9,
+        "player": "Alexis Sanchez",
+        "position": "Winger",
+        "country": "Chile",
+        "comments": {
+            "height": "short",
+            "target": "win titles"
+        },
+        "otherclubs": {
+            "italy": "intermilan",
+            "spain": [
+                "barcelona"
+            ],
+            "england": [
+                "arsenal",
+                "manu"
+            ]
+        },
+        "isactive": false
+    }
+]

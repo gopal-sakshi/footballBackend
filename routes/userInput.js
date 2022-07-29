@@ -11,7 +11,8 @@ router.get('/submit', (req, res) => {
 
 router.post('/submit', (req, res) => {
     console.log('got body', req.body);
-    res.send('form received');
+    console.log('name = ', req.body.first_name);
+    res.send(`form received ${req.body.first_name}`);
 })
 module.exports = router;
 //https://medium.com/swlh/read-html-form-data-using-get-and-post-method-in-node-js-8d2c7880adbf

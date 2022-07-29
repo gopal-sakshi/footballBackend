@@ -1,19 +1,27 @@
+/************************* IMPORTS *************************** */
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var app = express();
+/************************* end of IMPORTS *************************** */
 
+
+
+/********************** SUB ROUTES ***********************/
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var playersRouter = require('./routes/players');
-var playersInS3Router = require('./routes/playersInS3');
-var teamsRouter = require('./routes/teams');
-var squadsRouter = require('./routes/clubSquad')
+var playersRouter = require('./routes/players_dynamo_aws');
+var playersInS3Router = require('./routes/players_s3_aws');
+var teamsRouter = require('./routes/teams_dynamo_aws');
+var squadsRouter = require('./routes/clubSquad_postgres')
 var userInputRouter = require('./routes/userInput')
+/********************** END OF SUB ROUTES ***********************/
 
-var app = express();
 
+
+/****************** CORS stuff ******************************/
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -32,27 +40,39 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+/****************** end of CORS stuff ******************************/
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
 
-// app.use(logger('dev'));
+
+/************************* CONFIG Express APP ***************************/
+app.set('views', path.join(__dirname, 'views'));            // If you comment this.... res.render() wont work
+app.set('view engine', 'jade');
+
+// app.use(logger('dev'));                                  // Use morgan for logging errors
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+/************************* end of CONFIG Express APP ***************************/
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/players', playersRouter);
-// app.use('playersInS3', playersInS3Router);        // struggled 30min... because playersInS3 didnt have backslash... 
-                                                      // had to remove/comment everything to find out the error
-app.use('/playersInS3', playersInS3Router);
-app.use('/teams', teamsRouter);
-app.use('/squads', squadsRouter);
-app.use('/userInput', userInputRouter);
 
+
+
+/*************************** register sub routes ******************************/
+app.use('/', indexRouter);                          // check to see how 'view engine' works
+app.use('/users', usersRouter);                     // just another endpoint... not much use now...
+app.use('/playersInS3', playersInS3Router);         // AWS S3 bucket = gopal612-football-backend-acl
+// app.use('playersInS3', playersInS3Router);       // struggled 30min... because playersInS3 didnt have backslash... 
+app.use('/squads', squadsRouter);                   // fetch squads from 'football database' --- postgres local
+app.use('/players', playersRouter);                 // 'fb_playersTable' ---- AWS dynamo
+app.use('/teams', teamsRouter);                     // 'fb_teamsTable' -------- AWS dynamo
+app.use('/userInput', userInputRouter);             // submit & form... and get the response ------ WORKING
+
+/*************************** end of register sub routes ******************************/
+
+
+
+/************************* EXPLORE LATER ******************************* */
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   next(createError(404));
@@ -68,5 +88,6 @@ app.use('/userInput', userInputRouter);
 //   res.status(err.status || 500);
 //   res.render('error');
 // });
+/************************* end of EXPLORE LATER ******************************* */
 
 module.exports = app;
