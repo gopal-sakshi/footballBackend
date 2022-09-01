@@ -10,6 +10,10 @@ aws dynamodb create-table \
         ReadCapacityUnits=5,WriteCapacityUnits=5 \
     --table-class STANDARD
 
+
+ProductCatalog table
+
+aws dynamodb create-table --table-name ProductCatalog --attribute-definitions AttributeName=Id,AttributeType=N --key-schema AttributeName=Artist,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5  --table-class STANDARD
 --------------------------------------------------------------------------------------------------------------
 
 Don't include any non-key attribute definitions in AttributeDefinitions.
