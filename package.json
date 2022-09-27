@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "you should use START-DEV": "dont use start... use start-dev"
+    "start": "nodemon ./bin/www"    
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",

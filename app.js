@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
+var dynamicConfigFinal = require('./config/dynamicConfigFinal');
 /************************* end of IMPORTS *************************** */
 
 
@@ -39,6 +40,16 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
 
     // Pass to next layer of middleware
+    next();
+});
+
+app.use(function(req,res, next) {
+    console.log(req.query);
+    if(req.query.clubName == 'RMCastilla') {
+        dynamicConfigFinal.club23.setValue('RMCastilla');
+    } else {
+        dynamicConfigFinal.club23.setValue('RealMadrid');
+    }
     next();
 });
 /****************** end of CORS stuff ******************************/
