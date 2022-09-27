@@ -1,20 +1,30 @@
 var express = require('express');
 var router = express.Router();
-var dynamodb = require("../config/dynamo-local-config")
+var dynamoDb = require("../config/dynamo-local-config");
+var dynamoClient = require("../config/dynamo-local-config");
 
+// CREATE TABLE - available only with dynamoDb... not available with dynamoClient
 router.post('/createTable', function(req, res){
     console.log('wait - let me create table');
     createTable().then(data => res.send(data)).catch(err => res.send(err));
 });
-router.post('/addPlayer', function(req,res) {
+router.post('/db/addPlayer', function(req,res) {
     // console.log('adding player ',req.body);
-    addPlayer(req.body).then(data => res.send(data)).catch(err => res.send(err));
+    addPlayerDb(req.body).then(data => res.send(data)).catch(err => res.send(err));
     // res.send('ha ha haha');
 });
-router.get('/:playerId',function(req,res) {
-    getPlayer(req.params.playerId).then(data => res.send(data)).catch(err => res.send(err));
-})
-/************************************** PRIVATE METHODS ************************************/
+router.get('/db/:playerId',function(req,res) {
+    getPlayerDb(req.params.playerId).then(data => res.send(data)).catch(err => res.send(err));
+});
+router.post('/client/addPlayer', function(req,res) {
+    // console.log('adding player ',req.body);
+    addPlayerClient(req.body).then(data => res.send(data)).catch(err => res.send(err));
+    // res.send('ha ha haha');
+});
+router.get('/client/:playerId',function(req,res) {
+    getPlayerClient(req.params.playerId).then(data => res.send(data)).catch(err => res.send(err));
+});
+/************************************** PRIVATE METHODS for dynamoDb *****************/
 function createTable() {
     var params = {
         TableName : "footballers",
@@ -32,7 +42,7 @@ function createTable() {
         }
     }; 
     return new Promise((resolve, reject) => {
-        dynamodb.createTable(params, function(err, data) {
+        dynamoDb.createTable(params, function(err, data) {
             if (err) {
                 console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
                 reject(err);
@@ -44,7 +54,7 @@ function createTable() {
     });
 }
 
-function addPlayer(params23) {
+function addPlayerDb(params23) {
 
     var params = {
         TableName: "footballers",
@@ -57,26 +67,71 @@ function addPlayer(params23) {
     };
     // console.log(params23);
     return new Promise((resolve, reject) => {
-        dynamodb.putItem(params, (err, res) => {
+        dynamoDb.putItem(params, (err, res) => {
             if(err) { reject(err) }
             else resolve(res);
         })
     });
 }
 
-function getPlayer(playerId) {
+function getPlayerDb(playerId) {
+    console.log(playerId);
     var params = {
         TableName: 'footballers',        
         Key: { 'id': { "N": playerId }, 'name': { "S": 'Cristiano Ronaldo' } }
     };
     return new Promise((resolve, reject) => {
-        dynamodb.getItem(params, (err, data) => {
+        dynamoDb.getItem(params, (err, data) => {
             if(err) reject(err);
             else resolve(data);
         })
-    })
+    });
 }
-/************************************** PRIVATE METHODS ************************************/
+/************************************** PRIVATE METHODS for dynamoDb *******************/
+
+
+
+
+// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleTables.html
+// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleTables.html#AppendixSampleData.ProductCatalog
+// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SampleData.CreateTables.html#SampleData.CreateTables1
+
+
+/************************************** PRIVATE METHODS for dynamoClient *******************************************/
+
+function addPlayerClient(params23) {
+    var params = {
+        TableName: "footballers",
+        Item: {
+            "id": Number(params23.id),
+            "name": params23.name,
+            "club": params23.club,
+            "position": params23.position
+        }
+    };
+    return new Promise((resolve, reject) => {
+        dynamoClient.put(params, (err, res) => {
+            if(err) { reject(err) }
+            else resolve(res);
+        })
+    });
+}
+
+function getPlayerClient(playerId) {
+        
+    var params = {
+        TableName: 'footballers',        
+        Key: { "id": Number(playerId) , "name": "Karim Benzema" } 
+    };
+    return new Promise((resolve, reject) => {
+        dynamoClient.get(params, (err, data) => {
+            if(err) reject(err);
+            else resolve(data);
+        })
+    });
+}
+
+/************************************** PRIVATE METHODS for dynamoClient *********************************************/
 module.exports = router;
 
 
