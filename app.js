@@ -26,8 +26,16 @@ var userInputRouter = require('./routes/z_userInput');
 /****************** CORS stuff ******************************/
 app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9999');
+    // Allow multiple origins
+    const allowedOrigins = ['http://127.0.0.1:9988', 'http://localhost:9999', 'http://localhost:9988'];
+    const origin = req.headers.origin;
+    console.log(origin);
+        // browser URL can be http:localhost:9988 (or) http:127.0.01:9988
+    if (allowedOrigins.includes(origin)) {
+        console.log('jc');
+         res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9999');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
