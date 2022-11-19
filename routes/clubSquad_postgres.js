@@ -15,7 +15,7 @@ squadsCallback = async function (req, res) {
     
     var clubName = req.params.clubName;
     const query44 = `select * from ${clubName};`;
-
+    console.log(query44);
     pgClient.connect((err, client) => {
         if(err) res.send(err);
         client.query(query44, (err, results) => {
