@@ -19,6 +19,7 @@ var playersInS3Router = require('./routes/players_s3_aws');
 var teamsRouter = require('./routes/teams_dynamo_aws');
 var squadsRouter = require('./routes/clubSquad_postgres');
 var userInputRouter = require('./routes/z_userInput');
+var firebaseRouter = require('./routes/firebaseRouter');
 /********************** END OF SUB ROUTES ***********************/
 
 
@@ -90,6 +91,7 @@ app.use('/footballers', footballersRouter);         // 'footballers' table -----
 app.use('/userInput', userInputRouter);             // submit & form... and get the response ------ WORKING
 app.use('/', indexRouter);                          // check to see how 'view engine' works
 app.use('/users', usersRouter);                     // just another endpoint... not much use now...
+app.use('/firebase', firebaseRouter);
 /*************************** end of register sub routes ******************************/
 
 
