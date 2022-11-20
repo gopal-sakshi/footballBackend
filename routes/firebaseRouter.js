@@ -24,7 +24,7 @@ router.post('/send', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-    res.status(200).send('firebase send');
+    res.status(200).send({res: 'firebase send'});
 });
 
 
