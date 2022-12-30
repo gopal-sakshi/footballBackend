@@ -18,12 +18,14 @@
     "firebase-admin": "^11.3.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "mongoose": "^6.8.2",
     "morgan": "~1.9.1",
     "newman": "^3.9.1",
     "node-uuid": "^1.4.8",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "serve-favicon": "~2.4.5",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "validator": "^13.7.0"
   }
 }

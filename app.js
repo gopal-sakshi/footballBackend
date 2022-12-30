@@ -20,6 +20,7 @@ var teamsRouter = require('./routes/teams_dynamo_aws');
 var squadsRouter = require('./routes/clubSquad_postgres');
 var userInputRouter = require('./routes/z_userInput');
 var firebaseRouter = require('./routes/firebaseRouter');
+var moviesMongo = require('./routes_mongo/moviesStuff_mongo');
 /********************** END OF SUB ROUTES ***********************/
 
 
@@ -92,6 +93,7 @@ app.use('/userInput', userInputRouter);             // submit & form... and get 
 app.use('/', indexRouter);                          // check to see how 'view engine' works
 app.use('/users', usersRouter);                     // just another endpoint... not much use now...
 app.use('/firebase', firebaseRouter);
+app.use('/mongoRoutes23', moviesMongo);
 /*************************** end of register sub routes ******************************/
 
 
