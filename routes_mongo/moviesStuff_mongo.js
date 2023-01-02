@@ -82,11 +82,29 @@ router.get('/emailSearch23/:email', async (req, res) => {
 router.get('/heroHeroine/:movie23', async (req, res) => {
     console.log(req.params.movie23);
     const queryResult = await TeluguModel.findOne({
-        name: req.params.movie23                        // searches in 'name' field in teluguSchema
+        'name': req.params.movie23                        // searches in 'name' field in teluguSchema
+    }).then(doc => {
+        console.log(doc.toObject({virtuals:true}));
+        return doc;
     });
-    if(queryResult) res.send({res23: queryResult});
-    else res.send('po ra rei');
+    res.send(queryResult);
+    // if(queryResult) res.send({res23: queryResult});
+    // else res.send('po ra rei');
 });
+
+// Not WORKINGGGGGGGGGGGGGG
+router.get('/updateMovie/:movie23', async (req, res) => {
+    const queryResult = await TeluguModel.findOne({
+        'name': req.params.movie23
+    }).then(doc => {
+        // doc.heroDir = 'hero22__dir22';               
+        // doc.set('heroDir', 'hero22__dir22');
+    }).catch(err => {console.log(err); return null});
+    if(queryResult) res.send(queryResult);
+    else res.send('poyindi');
+});
+
+
 /***************************************************************************/
 
 
