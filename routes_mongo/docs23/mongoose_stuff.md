@@ -54,8 +54,8 @@ Schema
     that is enforced via the application layer.
 
 Models
-- higher-order constructors that take a schema 
-- and create an instance of a document equivalent to records in a relational database.
+- higher-order constructors that <take a schema> 
+- and create <an instance of a document> equivalent to records in a relational database.
 
 Schema_vs_Model
 - A Mongoose schema defines the structure of the document, default values, validators, 

@@ -6,6 +6,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
 var dynamicConfigFinal = require('./config/dynamicConfigFinal');
+
+// It seems connection must happen at app.js level only
+    // It seems connection need not happen at app.js level
+// var mongoose = require('mongoose');
+// var mongoString = require("./config/mongo-config");
+// mongoose.connect(mongoString, { useNewUrlParser: true , useUnifiedTopology: true});
 /************************* end of IMPORTS *************************** */
 
 

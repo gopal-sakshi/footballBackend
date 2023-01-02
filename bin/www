@@ -12,7 +12,8 @@ server.on('listening', onListening);
 process.on('SIGINT', () => {
   server.close(() => {
     console.log('Http server closed.');
-  });
+    process.exit();
+  });  
 })
 
 /***************************************************************** */
