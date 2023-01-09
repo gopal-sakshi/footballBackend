@@ -9,13 +9,41 @@ var express = require('express');
 var router = express.Router();
 let EmailModel = require('./schemas/emailSchema');
 let TeluguModel = require('./schemas/teluguSchema');
+let rmModel = require('./schemas/realMadrid');
 /***************************************************************************/
 
 
 
 
+/***************************** REAL MADRID ****************************************/
+
+router.put('/addPlayer', async(req, res) => {
+    let player = new rmModel(req.body);
+    console.log(player);
+    const result23 = await player.save().then(doc => {
+        return true
+    }).catch(err => {console.log(err); return false});
+    if(result23) res.send('hittu, player added');
+    else res.send('phatttuuu');
+});
+
+router.put('/searchRM', async(req, res) => {
+    let searchString = req.body.searchString;
+    const result23 = await rmModel.find({
+        $text: { $search: searchString }
+    }).then(doc => { console.log(doc); return doc }).catch(err => null);
+    if(result23) res.send(result23);
+    else res.send('phattu');
+})
+
+// build a text index and use it to find coffee shops, given only text fields.
+    // https://www.mongodb.com/docs/v4.4/text-search/
+
 /***************************************************************************/
 
+
+
+/************************** EMAIL *************************************/
 router.put('/addEmail', async (req, res) => {
     
     console.log('add email ', req.body);
@@ -32,20 +60,6 @@ router.put('/addEmail', async (req, res) => {
 
     if(result23) res.send('hittuu');
     else res.send('phattuu');
-});
-
-
-router.put('/addMovieTelugu', async (req, res) => {
-    let msg = new TeluguModel(req.body);
-    const result23 = await msg.save().then(doc => {
-        console.log(doc);
-        return true;
-    }).catch(err => {
-        console.log(err);
-        return false;
-    });
-    if(result23) res.send('hittu, movie added');
-    else res.send('phatttuuu');
 });
 
 router.get('/emailSearch23/:email', async (req, res) => {
@@ -65,7 +79,6 @@ router.get('/emailSearch23/:email', async (req, res) => {
     
 });
 
-
 // findOneAndUpdate
 // EmailModel.findOneAndUpdate(
 //   { email: 'ada.lovelace@gmail.com' },                                  // search query
@@ -78,6 +91,23 @@ router.get('/emailSearch23/:email', async (req, res) => {
 // EmailModel.findOneAndRemove({
 //     email: 'theoutlander@live.com'
 // }).then().catch();
+/***************************************************************************/
+
+
+/***************************** MOVIES ***************************************/
+router.put('/addMovieTelugu', async (req, res) => {
+    let msg = new TeluguModel(req.body);
+    const result23 = await msg.save().then(doc => {
+        console.log(doc);
+        return true;
+    }).catch(err => {
+        console.log(err);
+        return false;
+    });
+    if(result23) res.send('hittu, movie added');
+    else res.send('phatttuuu');
+});
+
 
 router.get('/heroHeroine/:movie23', async (req, res) => {
     console.log(req.params.movie23);
@@ -103,8 +133,6 @@ router.get('/updateMovie/:movie23', async (req, res) => {
     if(queryResult) res.send(queryResult);
     else res.send('poyindi');
 });
-
-
 /***************************************************************************/
 
 

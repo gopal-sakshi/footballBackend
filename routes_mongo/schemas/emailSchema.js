@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 const server = '127.0.0.1:27017';
-const database = 'email23';
+const database = 'movies23';
 var mongoString = `mongodb://${server}/${database}`;
 let validator = require('validator');
 
