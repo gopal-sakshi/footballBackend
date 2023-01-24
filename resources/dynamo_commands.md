@@ -4,10 +4,11 @@ a) switch aws profile
 `export AWS_PROFILE=dynamoLocal23` -- UBUNTU ---> As, I have two aws profiles; for now use dynamoLocal23 (valid till end of shell session)
 `set AWS_PROFILE dynamoLocal23` -- WINDOWS --> export is valid only for unix shells... in windows, use set... plus, there is not '=' sign
     // for some reason, its not working... so use this command...
-`aws dynamodb list-tables --endpoint-url http://localhost:8002 --profile dynamoLocal23`                                 // use a particular profile while running AWS
+`aws dynamodb list-tables --endpoint-url http://localhost:8002 --profile dynamoLocal23` 
+    // use a particular profile while running AWS
 
 b) see the list of tables
-`aws dynamodb list-tables --endpoint-url http://localhost:8002`                                                         
+`aws dynamodb list-tables --endpoint-url http://localhost:8002`
 `aws dynamodb list-tables --endpoint-url http://localhost:8002 --profile dynamoLocal23`
 
 c) create table
