@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start------": "nodemon ./bin/www",
+    "dynamo_local_windows": "cd \"C:\\Users\\gopal\\Downloads\\dynamodb_local_latest\" && java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb -port 8002",
     "readMe": "nodemon is one junk thingy... or I dont know how to use it... never ever use it",
     "use_this": "node ./bin/www"
   },
