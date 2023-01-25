@@ -8,19 +8,23 @@ router.post('/createTable', function(req, res){
     console.log('wait - let me create table');
     createTable().then(data => res.send(data)).catch(err => res.send(err));
 });
+
 router.post('/db/addPlayer', function(req,res) {
     // console.log('adding player ',req.body);
     addPlayerDb(req.body).then(data => res.send(data)).catch(err => res.send(err));
     // res.send('ha ha haha');
 });
+
 router.get('/db/:playerId',function(req,res) {
     getPlayerDb(req.params.playerId).then(data => res.send(data)).catch(err => res.send(err));
 });
+
 router.post('/client/addPlayer', function(req,res) {
     // console.log('adding player ',req.body);
     addPlayerClient(req.body).then(data => res.send(data)).catch(err => res.send(err));
     // res.send('ha ha haha');
 });
+
 router.get('/client/:playerId',function(req,res) {
     getPlayerClient(req.params.playerId).then(data => res.send(data)).catch(err => res.send(err));
 });
