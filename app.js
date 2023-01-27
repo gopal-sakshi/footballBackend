@@ -26,7 +26,8 @@ var teamsRouter = require('./routes/teams_dynamo_aws');
 var squadsRouter = require('./routes/clubSquad_postgres');
 var userInputRouter = require('./routes/z_userInput');
 var firebaseRouter = require('./routes/firebaseRouter');
-var moviesMongo = require('./routes_mongo/mongo23');
+// var moviesMongo = require('./routes_mongo/mongo23');
+var sequelizeRouter = require('./routes_sequelize/sequelize_postgres');
 /********************** END OF SUB ROUTES ***********************/
 
 
@@ -37,7 +38,7 @@ app.use(function (req, res, next) {
     // Allow multiple origins
     const allowedOrigins = ['http://127.0.0.1:9988', 'http://localhost:9999', 'http://localhost:9988'];
     const origin = req.headers.origin;
-    console.log(origin);
+    console.log('origin ===> ', origin);
         // browser URL can be http:localhost:9988 (or) http:127.0.01:9988
     if (allowedOrigins.includes(origin)) {
         console.log('jc');
@@ -59,15 +60,15 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(function(req,res, next) {
-    console.log(req.query);
-    if(req.query.clubName == 'RMCastilla') {
-        dynamicConfigFinal.club23.setValue('RMCastilla');
-    } else {
-        dynamicConfigFinal.club23.setValue('RealMadrid');
-    }
-    next();
-});
+// app.use(function(req,res, next) {
+//     console.log(req.query);
+//     if(req.query.clubName == 'RMCastilla') {
+//         dynamicConfigFinal.club23.setValue('RMCastilla');
+//     } else {
+//         dynamicConfigFinal.club23.setValue('RealMadrid');
+//     }
+//     next();
+// });
 /****************** end of CORS stuff ******************************/
 
 
@@ -99,7 +100,11 @@ app.use('/userInput', userInputRouter);             // submit & form... and get 
 app.use('/', indexRouter);                          // check to see how 'view engine' works
 app.use('/users', usersRouter);                     // just another endpoint... not much use now...
 app.use('/firebase', firebaseRouter);
-app.use('/mongoRoutes23', moviesMongo);
+// commenting mongoRoutes... uncomment only when mongo_server is running... 
+    // otherwise app crashes, coz it cant connect to mongo_server
+// app.use('/mongoRoutes23', moviesMongo);
+app.use('/sequelize', sequelizeRouter);
+
 /*************************** end of register sub routes ******************************/
 
 

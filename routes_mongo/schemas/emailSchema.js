@@ -3,7 +3,7 @@ const server = '127.0.0.1:27017';
 const database = 'movies23';
 var mongoString = `mongodb://${server}/${database}`;
 let validator = require('validator');
-
+console.log('called AT email')
 /************************************************************************ */
 // APPROACH I ========> mongoose.connect()      permitted only once in application
 // mongoose.connect(mongoString, { useNewUrlParser: true , useUnifiedTopology: true});
