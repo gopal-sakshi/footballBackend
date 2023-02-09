@@ -22,7 +22,7 @@ router.get('/', function(req, res) {
             console.log("unable to fetch players data");
             console.log(err);
             res.status = httpStatusCodes.serverError
-            res.send("Unable to fetch player data");
+            res.send("Unable to fetch player data23");
         } else {
             res.send(data);
         }

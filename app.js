@@ -39,10 +39,10 @@ app.use(function (req, res, next) {
     const allowedOrigins = ['http://127.0.0.1:9988', 'http://localhost:9999', 'http://localhost:9988'];
     const origin = req.headers.origin;
     console.log('origin ===> ', origin);
-        // browser URL can be http:localhost:9988 (or) http:127.0.01:9988
+        // browser URL can be http:localhost:9988 (or) http:127.0.0.1:9988
     if (allowedOrigins.includes(origin)) {
         console.log('jc');
-         res.setHeader('Access-Control-Allow-Origin', origin);
+        // res.setHeader('Access-Control-Allow-Origin', origin);
     }
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9999');
 
