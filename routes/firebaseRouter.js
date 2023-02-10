@@ -17,8 +17,8 @@ router.post('/send', async (req, res) => {
     var newData = req.body;
     try {
         await firestore
-            .collection('testing_chats')
-            .doc('user44')
+            .collection('football_clubs')
+            .doc('Barcelona')
             .set(newData)
             .then( data => { console.log(data) })
     } catch (error) {
