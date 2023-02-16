@@ -58,15 +58,15 @@ router.get('/:club', async function(req, res) {
 }) 
 
 /** add a player */
-router.post('/addPlayer', function(req, res) {
+router.post('/addPlayer', async function(req, res) {
     console.log('post request for player');
     //console.log(req.body);
-    addPlayer(req.body);
-    res.send('player added successfully');
+    await addPlayer(req.body) ? res.send('player added successfully') : res.send('phattu - cant add player') ;
+    
 })
 
 /************************************* PRIVATE METHODS  ******************************/
-function addPlayer(playerData) {
+async function addPlayer(playerData) {
     console.log(playerData);
 
     var params = {
@@ -80,13 +80,12 @@ function addPlayer(playerData) {
         }
     };
 
-    dynamoClient.put(params, function(err, data) {
-        if(err) {
-            console.log("unable to add... ", err)
-        } else {
-            console.log("player added");
-        }
-    })
+    return new Promise ((resolve, reject) => {
+        dynamoClient.put(params, function(err, data) {
+            if(err) { console.log(err); reject(false) } 
+            else { resolve(true); }
+        });
+    })    
 }
 
 module.exports = router;

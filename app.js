@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
         // browser URL can be http:localhost:9988 (or) http:127.0.0.1:9988
     if (allowedOrigins.includes(origin)) {
         console.log('jc');
-        // res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Origin', origin);
     }
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9999');
 
