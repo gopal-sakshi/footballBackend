@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start------": "nodemon ./bin/www",
+    "start": "nodemon ./bin/www",
     "dynamo_local_windows": "cd \"C:\\Users\\gopal\\Downloads\\dynamodb_local_latest\" && java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb -port 8002",
     "readMe": "nodemon is one junk thingy... or I dont know how to use it... never ever use it",
     "use_this": "node ./bin/www"
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",
+    "axios": "^1.3.4",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.4",
@@ -26,6 +27,7 @@
     "node-uuid": "^1.4.8",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
+    "redis": "^4.6.5",
     "sequelize": "^6.28.0",
     "sequelize-cli": "^6.6.0",
     "serve-favicon": "~2.4.5",
