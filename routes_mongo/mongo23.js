@@ -27,6 +27,15 @@ router.put('/addPlayer', async(req, res) => {
     else res.send('phatttuuu');
 });
 
+router.put('/updatePlayer', async(req, res) => {
+    let player = new rmModel(req.body);
+    console.log(player);
+    const filter12 = { playerName: player.playerName };
+    const update12 = { phone: player.phone };
+    const result23 = await rmModel.findOneAndUpdate(filter12, update12, { new: true });
+    res.send(result23);
+})
+
 router.put('/searchRM', async(req, res) => {
     let searchString = req.body.searchString;
     const result23 = await rmModel.find({
@@ -114,7 +123,7 @@ router.get('/heroHeroine/:movie23', async (req, res) => {
     const queryResult = await TeluguModel.findOne({
         'name': req.params.movie23                        // searches in 'name' field in teluguSchema
     }).then(doc => {
-        console.log(doc.toObject({virtuals:true}));
+        console.log(doc.toObject({virtuals:true}));        
         return doc;
     });
     res.send(queryResult);

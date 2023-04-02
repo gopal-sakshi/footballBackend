@@ -9,6 +9,12 @@ var mongoString = `mongodb://${server}/${database}`;
 
 
 // APPROACH II =======> mongoose.createConnection()         used for accessing multiple databases
+var options23 = {
+    "auth": { "authSource": "movies23" },
+    "user": "gopal1",
+    "pass": "1258"
+}
+// var connection12 = mongoose.createConnection(mongoString, options23);
 var connection12 = mongoose.createConnection(mongoString);
 
 
