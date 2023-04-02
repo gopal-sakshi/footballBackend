@@ -5,7 +5,7 @@ var mongoString = `mongodb://${server}/${database}`;
 
 /************************************************************************ */
 // APPROACH I ========> mongoose.connect()      permitted only once in application
-// mongoose.connect(mongoString, { useNewUrlParser: true , useUnifiedTopology: true});
+mongoose.connect(mongoString, { useNewUrlParser: true , useUnifiedTopology: true});
 
 
 // APPROACH II =======> mongoose.createConnection()         used for accessing multiple databases
@@ -15,7 +15,7 @@ var options23 = {
     "pass": "1258"
 }
 // var connection12 = mongoose.createConnection(mongoString, options23);
-var connection12 = mongoose.createConnection(mongoString);
+// var connection12 = mongoose.createConnection(mongoString);
 
 
 // APPROACH III =======> mongoose.connection.useDb()
@@ -62,4 +62,5 @@ teluguSchema.methods.getInitials = function() {
     return this.firstName[0] + this.lastName[0]
 }
 
-module.exports = connection12.model('telugu23', teluguSchema);
+module.exports = mongoose.model('telugu23', teluguSchema);
+// module.exports = connection12.model('telugu23', teluguSchema);
