@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
-var dynamicConfigFinal = require('./config/dynamicConfigFinal');
+const sum12 = require('./routes/maths11');
 
 // It seems connection must happen at app.js level only
     // It seems connection need not happen at app.js level
@@ -26,8 +26,8 @@ var teamsRouter = require('./routes/teams_dynamo_aws');
 var squadsRouter = require('./routes/clubSquad_postgres');
 var userInputRouter = require('./routes/z_userInput');
 var firebaseRouter = require('./routes/firebaseRouter');
-var mongo23 = require('./routes_mongo/mongo23');
-var mongo24 = require('./routes_mongo/mongo24');
+// var mongo23 = require('./routes_mongo/mongo23');
+// var mongo24 = require('./routes_mongo/mongo24');
 // var sequelizeRouter = require('./routes_sequelize/sequelize_postgres');
 // var redisRouter = require('./routes/email23_redis');
 /********************** END OF SUB ROUTES ***********************/
@@ -61,16 +61,6 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-
-// app.use(function(req,res, next) {
-//     console.log(req.query);
-//     if(req.query.clubName == 'RMCastilla') {
-//         dynamicConfigFinal.club23.setValue('RMCastilla');
-//     } else {
-//         dynamicConfigFinal.club23.setValue('RealMadrid');
-//     }
-//     next();
-// });
 /****************** end of CORS stuff ******************************/
 
 
@@ -98,14 +88,16 @@ app.use('/players', playersRouter);                 // 'fb_playersTable' ---- AW
 app.use('/teams', teamsRouter);                     // 'fb_teamsTable' -------- AWS dynamo
 app.use('/footballers', footballersRouter);         // 'footballers' table ----- dynamo local
 
-app.use('/userInput', userInputRouter);             // submit & form... and get the response ------ WORKING
+// submit & form... and get the response ------ WORKING
+app.use('/userInput', (req, res, next) => { req['sumResult'] = sum12(3,4); next(); }, userInputRouter);
+
 app.use('/', indexRouter);                          // check to see how 'view engine' works
 app.use('/users', usersRouter);                     // just another endpoint... not much use now...
 app.use('/firebase', firebaseRouter);
 // commenting mongoRoutes... uncomment only when mongo_server is running... 
     // otherwise app crashes, coz it cant connect to mongo_server
-app.use('/mongoRoutes23', mongo23);
-app.use('/mongoRoutes24', mongo24);
+// app.use('/mongoRoutes23', mongo23);
+// app.use('/mongoRoutes24', mongo24);
 // app.use('/sequelize', sequelizeRouter);
 // app.use('/redis23', redisRouter);
 /*************************** end of register sub routes ******************************/

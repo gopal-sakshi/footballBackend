@@ -6,7 +6,8 @@
     "start": "nodemon ./bin/www",
     "dynamo_local_windows": "cd \"C:\\Users\\gopal\\Downloads\\dynamodb_local_latest\" && java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb -port 8002",
     "readMe": "nodemon is one junk thingy... or I dont know how to use it... never ever use it",
-    "use_this": "node ./bin/www"
+    "use_this": "node ./bin/www",
+    "test12": "jest"
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",
@@ -33,5 +34,9 @@
     "serve-favicon": "~2.4.5",
     "uuid": "^3.2.1",
     "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
   }
 }

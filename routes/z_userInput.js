@@ -9,7 +9,7 @@ router.get('/submit', (req, res) => {
     console.log("process.cwd() --------> ", process.cwd());
     console.log("./ -------------------> ", path.resolve("./"));
     console.log("filename -------------> ", __filename);
-    
+    console.log(req.sumResult);
     res.sendFile(path.resolve("./","resources","index23.html"));
 });
 
