@@ -7,7 +7,10 @@
     "dynamo_local_windows": "cd \"C:\\Users\\gopal\\Downloads\\dynamodb_local_latest\" && java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb -port 8002",
     "readMe": "nodemon is one junk thingy... or I dont know how to use it... never ever use it",
     "use_this": "node ./bin/www",
-    "test12": "jest"
+    "test12": "jest",
+    "dynamoGui":"SET DYNAMO_ENDPOINT=http://localhost:8002 && dynamodb-admin",
+    "dynamoDocker":"SET DYNAMO_ENDPOINT=http://localhost:49003 && dynamodb-admin",
+    "dynamoDocker1":"SET DYNAMO_ENDPOINT=http://localhost:49003 && SET AWS_REGION=us-east-2 && SET AWS_ACCESS_KEY_ID=chanti_gadu_local && SET AWS_SECRET_ACCESS_KEY=idiot_movie && dynamodb-admin"
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",
@@ -16,6 +19,7 @@
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.4",
     "debug": "~2.6.9",
+    "dynamodb-admin": "^4.5.0",
     "ejs": "^2.5.7",
     "express": "~4.16.1",
     "firebase-admin": "^11.3.0",

@@ -41,3 +41,6 @@ let emailSchema = new mongoose.Schema({
 // call the model() constructor on the Mongoose instance
     // pass it the name of the collection and a reference to the schema definition.
 module.exports = connection11.model('Email', emailSchema);
+// 1st arg ===> singular name of the collection your model is for. 
+// Mongoose automatically looks for the plural, lowercased version of your model name. 
+// So, model 'Email' is for the 'emails' collection in the database.

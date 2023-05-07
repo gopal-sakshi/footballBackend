@@ -71,6 +71,7 @@
 ---------------------------------------------------------------------------------------------------
 AttributeDefinitions
 - An array of attributes that describe the key schema for the table & indexes.
+- Don't include any non-key attribute definitions in AttributeDefinitions.
 
 KeySchema
 - Specifies the attributes that make up the primary key for a table or an index

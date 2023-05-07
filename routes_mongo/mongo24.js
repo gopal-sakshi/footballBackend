@@ -14,6 +14,7 @@ router.get('/top4Movies', async (req, res) => {
     res.send(queryResult);    
 });
 
+// NOT WORKING
 router.get('/top6Movies', async (req, res) => {    
     const queryResult = await moviesModel.find()
     .populate('title', 'year', 'imdb.rating')
