@@ -6,7 +6,7 @@ var mongoString = `mongodb://${server}/${database}`;
 var connection13 = mongoose.createConnection(mongoString);
 
 let rmSchema = new mongoose.Schema({ 
-    playerName: { type: String, required: true, unique: true },
+    playerName: { type: String, required: true, unique: true },         // unique:true ---> creates "Unique Index"
     postion: { type: String, required: true, enum: ['GK', 'Defence', 'Midfield', 'Attack' ] },
     otherStuff: {type: mongoose.Schema.Types.Mixed },
     description: {type: String },

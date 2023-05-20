@@ -58,7 +58,7 @@ Models
 - and create <an instance of a document> equivalent to records in a relational database.
 
 Schema_vs_Model
-- A Mongoose schema defines the structure of the document, default values, validators, 
+- A Mongoose schema defines the structure/blue_print of the document, default values, validators, 
 - A Mongoose model provides an interface to the database for creating, querying, updating, deleting records
 
 
