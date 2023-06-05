@@ -60,12 +60,45 @@ addPlayerCallback = async function (req, res) {
     // res.send('undavayya');
 }
 
+
+// for some reason ---> not working... check later
+transferFundsCb = async function(req, res) {
+
+    // to typecast string to integer use either of these queries
+    // call rm_transfer('Kaka','Kroos', CAST('600' AS INTEGER));
+    // call rm_transfer('Kaka','Kroos', '600'::INTEGER);
+
+    const query44 = `call rm_transfer('${req.body.sender}', '${req.body.receiver}', ${req.body.amount});`;
+    console.log(query44);
+    pgPool.connect((err, client, done) => {
+        if(err) res.send(err);
+        client.query(query44, (err, results) => {
+            done();
+            if(err) res.send(err);
+            else { res.send(results); }
+        });
+    });
+}
+
+inCapsCb = async function (req, res) {
+    const query44 = `select returnCaps(name), assets from rm_accounts`;
+    console.log(query44);
+    pgPool.connect((err, client, done) => {
+        if(err) res.send(err);
+        client.query(query44, (err, results) => {
+            done();
+            if(err) res.send(err);
+            else { res.send(results); }
+        });
+    });
+}
 /*********************************************** */
 // List of routes...
 
+router.get('/inCaps', inCapsCb);
+router.post('/transferFunds', transferFundsCb );
 router.post('/:clubName/addPlayer', addPlayerCallback);
 router.get('/:clubName', squadsCallback);
-
 
 /*********************************************** */
 
