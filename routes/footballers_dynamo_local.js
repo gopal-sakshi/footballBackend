@@ -8,23 +8,26 @@ router.post('/createTable', function(req, res){
     console.log('wait - let me create table');
     createTable().then(data => res.send(data)).catch(err => res.send(err));
 });
-
+/***********************************************************************/
+// add player dynamoDb
 router.post('/db/addPlayer', function(req,res) {
     // console.log('adding player ',req.body);
     addPlayerDb(req.body).then(data => res.send(data)).catch(err => res.send(err));
     // res.send('ha ha haha');
 });
-
-router.get('/db/:playerId',function(req,res) {
-    getPlayerDb(req.params.playerId).then(data => res.send(data)).catch(err => res.send(err));
-});
-
+// add player dynamoClient
 router.post('/client/addPlayer', function(req,res) {
     // console.log('adding player ',req.body);
     addPlayerClient(req.body).then(data => res.send(data)).catch(err => res.send(err));
     // res.send('ha ha haha');
 });
+/***********************************************************************/
+// get player dynamoDb.docClient
+router.get('/db/:playerId',function(req,res) {
+    getPlayerDb(req.params.playerId).then(data => res.send(data)).catch(err => res.send(err));
+});
 
+// get player dynamoDb
 router.get('/client/:playerId',function(req,res) {
     getPlayerClient(req.params.playerId).then(data => res.send(data)).catch(err => res.send(err));
 });
@@ -58,6 +61,7 @@ function createTable() {
     });
 }
 
+/*************************************************************************************/
 function addPlayerDb(params23) {
 
     var params = {
@@ -78,31 +82,6 @@ function addPlayerDb(params23) {
     });
 }
 
-function getPlayerDb(playerId) {
-    console.log(playerId);
-    var params = {
-        TableName: 'footballers',        
-        Key: { 'id': { "N": playerId }, 'name': { "S": 'Cristiano Ronaldo' } }
-    };
-    return new Promise((resolve, reject) => {
-        dynamoDb.getItem(params, (err, data) => {
-            if(err) reject(err);
-            else resolve(data);
-        })
-    });
-}
-/************************************** PRIVATE METHODS for dynamoDb *******************/
-
-
-
-
-// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleTables.html
-// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleTables.html#AppendixSampleData.ProductCatalog
-// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SampleData.CreateTables.html#SampleData.CreateTables1
-
-
-/************************************** PRIVATE METHODS for dynamoClient *******************************************/
-
 function addPlayerClient(params23) {
     var params = {
         TableName: "footballers",
@@ -120,6 +99,21 @@ function addPlayerClient(params23) {
         })
     });
 }
+/*************************************************************************************/
+
+function getPlayerDb(playerId) {
+    console.log(playerId);
+    var params = {
+        TableName: 'footballers',        
+        Key: { 'id': { "N": playerId }, 'name': { "S": 'Cristiano Ronaldo' } }
+    };
+    return new Promise((resolve, reject) => {
+        dynamoDb.getItem(params, (err, data) => {
+            if(err) reject(err);
+            else resolve(data);
+        })
+    });
+}
 
 function getPlayerClient(playerId) {
         
@@ -134,6 +128,16 @@ function getPlayerClient(playerId) {
         })
     });
 }
+/************************************** PRIVATE METHODS for dynamoDb *******************/
+
+
+
+
+/************************************** PRIVATE METHODS for dynamoClient *******************************************/
+
+
+
+
 
 /************************************** PRIVATE METHODS for dynamoClient *********************************************/
 module.exports = router;
@@ -163,3 +167,8 @@ module.exports = router;
 
 
 */
+
+
+// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleTables.html
+// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AppendixSampleTables.html#AppendixSampleData.ProductCatalog
+// https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SampleData.CreateTables.html#SampleData.CreateTables1

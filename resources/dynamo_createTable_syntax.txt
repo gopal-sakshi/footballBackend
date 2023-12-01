@@ -101,5 +101,4 @@ MANDATORY Fields
 - AttributeDefinitions
 - KeySchema
 - TableName
-
-
+---------------------------------------------------------------------------------------------------
