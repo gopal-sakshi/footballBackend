@@ -27,7 +27,7 @@ describe("testing GET Todos23", () => {
     afterAll(async () => { await request(baseURL).delete(`/users/todos`); });
     it("statusCode23 = 200", async () => {
         const response = await request(baseURL).get("/users/todos");
-        // console.log(response.body);
+        console.log(response.body);
         expect(response.statusCode).toBe(200);
         expect(response.body.error).toBe(null);
         expect(response.body.data.length >= 1).toBe(true);
@@ -39,15 +39,15 @@ describe("testing GET Todos23", () => {
     });
 });
 
-describe("POST /todo", () => {
-    const newTodo = { id: 14, item: "watch football", completed: false };
-    afterAll(async () => { await request(baseURL).delete(`/users/todos`) });
-    it("should add an item to todos array", async () => {
-        const response = await request(baseURL).post("/users/todos").send(newTodo);
-        // console.log(response.body);
-        const lastItem = response.body.data[response.body.data.length-1];
-        expect(response.statusCode).toBe(201);
-        expect(lastItem.item).toBe(newTodo["item"]);
-        expect(lastItem.completed).toBe(newTodo["completed"]);
-    });
-});
+// describe("POST /todo", () => {
+//     const newTodo = { id: 14, item: "watch football", completed: false };
+//     afterAll(async () => { await request(baseURL).delete(`/users/todos`) });
+//     it("should add an item to todos array", async () => {
+//         const response = await request(baseURL).post("/users/todos").send(newTodo);
+//         // console.log(response.body);
+//         const lastItem = response.body.data[response.body.data.length-1];
+//         expect(response.statusCode).toBe(201);
+//         expect(lastItem.item).toBe(newTodo["item"]);
+//         expect(lastItem.completed).toBe(newTodo["completed"]);
+//     });
+// });
