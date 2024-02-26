@@ -38,7 +38,13 @@ squadsCallback = async function (req, res) {
         client.query(query44, (err, results) => {
             done();
             if(err) res.send(err);
-            else { res.send(results); }
+            else { 
+                // res.send(results);
+                // res.send(results.rows);
+                res.send(results.rows.map((row) => { 
+                    return { id23: row.id, playerPeru: row.player }
+                })); 
+            }
         });
     });
 }
@@ -70,7 +76,7 @@ addPlayerCallback = async function (req, res) {
 }
 
 
-// for some reason ---> not working... check later
+// working... but req.body.sender must be Kaka, not kaka; plus what CALL returns as response ??
 transferFundsCb = async function(req, res) {
 
     // to typecast string to integer use either of these queries
@@ -83,7 +89,7 @@ transferFundsCb = async function(req, res) {
         if(err) res.send(err);
         client.query(query44, (err, results) => {
             done();
-            if(err) res.send(err);
+            if(err) { console.log(err); res.send(err);}
             else { res.send(results); }
         });
     });
@@ -101,14 +107,27 @@ inCapsCb = async function (req, res) {
         });
     });
 }
+
+getCanteen = async function(req, res) {
+    const query44 = `select * from rm_canteen;`;
+    console.log('query33 =========> ', query44)
+    pgPool.connect((err, client, done) => {
+        if(err) res.send(err);
+        client.query(query44, (err, results) => {
+            done();
+            if(err) { console.log(err); res.send(err);}
+            else { res.send(results.rows); }
+        });
+    });
+}
 /*********************************************** */
 // List of routes...
 
 router.get('/inCaps', inCapsCb);
 router.post('/transferFunds', transferFundsCb );
+router.get('/canteen', getCanteen);
 router.post('/:clubName/addPlayer', addPlayerCallback);
 router.get('/:clubName', squadsCallback);
-
 /*********************************************** */
 
 
