@@ -26,6 +26,7 @@ var teamsRouter = require('./routes/teams_dynamo_aws');
 var squadsRouter = require('./routes/clubSquad_postgres');
 var userInputRouter = require('./routes/z_userInput');
 var firebaseRouter = require('./routes/firebaseRouter');
+var triggerRouter = require('./routes_trigger23/blah1');
 // var mongo23 = require('./routes_mongo/mongo23');
 // var mongo24 = require('./routes_mongo/mongo24');
 // var sequelizeRouter = require('./routes_sequelize/sequelize_postgres');
@@ -94,6 +95,8 @@ app.use('/userInput', (req, res, next) => { req['sumResult'] = sum12(3,4); next(
 app.use('/', indexRouter);                          // check to see how 'view engine' works
 app.use('/users', usersRouter);                     // just another endpoint... not much use now...
 app.use('/firebase', firebaseRouter);
+app.use('/trigger23', triggerRouter);
+
 // commenting mongoRoutes... uncomment only when mongo_server is running... 
     // otherwise app crashes, coz it cant connect to mongo_server
 // app.use('/mongoRoutes23', mongo23);
