@@ -27,8 +27,8 @@ var squadsRouter = require('./routes/clubSquad_postgres');
 var userInputRouter = require('./routes/z_userInput');
 var firebaseRouter = require('./routes/firebaseRouter');
 var triggerRouter = require('./routes_trigger23/blah1');
-// var mongo23 = require('./routes_mongo/mongo23');
-// var mongo24 = require('./routes_mongo/mongo24');
+var mongo23 = require('./routes_mongo/mongo23');
+var mongo24 = require('./routes_mongo/mongo24');
 // var sequelizeRouter = require('./routes_sequelize/sequelize_postgres');
 // var redisRouter = require('./routes/email23_redis');
 /********************** END OF SUB ROUTES ***********************/
@@ -98,9 +98,10 @@ app.use('/firebase', firebaseRouter);
 app.use('/trigger23', triggerRouter);
 
 // commenting mongoRoutes... uncomment only when mongo_server is running... 
-    // otherwise app crashes, coz it cant connect to mongo_server
-// app.use('/mongoRoutes23', mongo23);
-// app.use('/mongoRoutes24', mongo24);
+// RUN THE DOCKER CONTAINERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+// otherwise app crashes, coz it cant connect to mongo_server
+app.use('/mongoRoutes23', mongo23);
+app.use('/mongoRoutes24', mongo24);
 // app.use('/sequelize', sequelizeRouter);
 // app.use('/redis23', redisRouter);
 /*************************** end of register sub routes ******************************/

@@ -1,6 +1,17 @@
 var mongoose = require('mongoose');
 var mongoString = `mongodb://127.0.0.1:27017/zips23`;
-var connection12 = mongoose.createConnection(mongoString);
+
+
+var connection12 = mongoose.createConnection(mongoString);           // USE PROMISES arey
+// var connection12 = mongoose.createConnection(mongoString).asPromise().then((conn) => {
+//     console.log("connection established arey23 ===> ", conn);
+//     return conn
+// }).catch(err => { console.log("mongo docker container run cheyi raa "); })
+
+/*
+    createConnection() ===> doesnt return a promise
+    connect() ============> returns a promise
+*/
 /************************************************************************ */
 
 let moviesSchema = new mongoose.Schema({

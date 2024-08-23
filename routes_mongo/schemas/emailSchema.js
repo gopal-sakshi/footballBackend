@@ -9,7 +9,7 @@ let validator = require('validator');
 
 
 // APPROACH II =======> mongoose.createConnection()         used for accessing multiple databases
-var connection11 = mongoose.createConnection(mongoString);
+var connection11 = mongoose.createConnection(mongoString)
 /************************************************************************ */
 function obfuscate23(email) {
     const id23 = email.indexOf('@');

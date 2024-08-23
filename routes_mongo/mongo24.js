@@ -22,6 +22,23 @@ router.get('/top6Movies', async (req, res) => {
     res.send(queryResult);    
 });
 
+router.get('/aggregate23', async (req, res) => {
+    const queryResult = await moviesModel.aggregate([
+        { $project: { title: 1, year: 1, _id:0 } },
+        { $skip: 5 }
+    ]).limit(5);
+    res.send(queryResult);
+});
+
+// aggregate.group({ _id: "$department" });
+router.get('/aggregate24_group', async (req, res) => {
+    const queryResult = await moviesModel.aggregate([
+        { $project: { title: 1, year: 1, _id:0 } },
+        { $skip: 5 }
+    ]).group({ _id: "$year"});
+    res.send(queryResult);
+});
+
 /***************************************************************************/
 module.exports = router;
 /***************************************************************************/
