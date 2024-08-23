@@ -17,7 +17,7 @@ let rmModel = require('./schemas/realMadrid');
 
 /***************************** REAL MADRID ****************************************/
 
-router.put('/addPlayer', async(req, res) => {
+let addPlayerCb = async(req, res) => {
     let player = new rmModel(req.body);
     console.log(player);
     const result23 = await player.save().then(doc => {
@@ -25,25 +25,25 @@ router.put('/addPlayer', async(req, res) => {
     }).catch(err => {console.log(err); return false});
     if(result23) res.send('hittu, player added');
     else res.send('phatttuuu');
-});
+}
 
-router.put('/updatePlayer', async(req, res) => {
+let updatePlayerCb = async(req, res) => {
     let player = new rmModel(req.body);
     console.log(player);
     const filter12 = { playerName: player.playerName };
     const update12 = { phone: player.phone };
     const result23 = await rmModel.findOneAndUpdate(filter12, update12, { new: true });
     res.send(result23);
-})
+}
 
-router.put('/searchRM', async(req, res) => {
+let searchRMCb = async(req, res) => {
     let searchString = req.body.searchString;
     const result23 = await rmModel.find({
         $text: { $search: searchString }
     }).then(doc => { console.log(doc); return doc }).catch(err => null);
     if(result23) res.send(result23);
     else res.send('phattu');
-})
+}
 
 // build a text index and use it to find coffee shops, given only text fields.
     // https://www.mongodb.com/docs/v4.4/text-search/
@@ -53,7 +53,7 @@ router.put('/searchRM', async(req, res) => {
 
 
 /************************** EMAIL *************************************/
-router.put('/addEmail', async (req, res) => {
+let addEmailCb = async (req, res) => {
     
     console.log('add email ', req.body);
     let msg = new EmailModel({
@@ -69,9 +69,9 @@ router.put('/addEmail', async (req, res) => {
 
     if(result23) res.send('hittuu');
     else res.send('phattuu');
-});
+}
 
-router.get('/emailSearch23/:email', async (req, res) => {
+let emailSearchCb = async (req, res) => {
 
     // APPROACH I =====> normally return
     const queryResult = await EmailModel.find({
@@ -86,7 +86,10 @@ router.get('/emailSearch23/:email', async (req, res) => {
     //     email: req.params.email
     // }).then(doc => res.json(doc)).catch(res.json({message: 'obfuscate pani cheyyala'}));    
     
-});
+}
+
+router.put('/addEmail', addEmailCb);
+router.get('/emailSearch23/:email', emailSearchCb);
 
 // findOneAndUpdate
 // EmailModel.findOneAndUpdate(
@@ -104,7 +107,7 @@ router.get('/emailSearch23/:email', async (req, res) => {
 
 
 /***************************** MOVIES ***************************************/
-router.put('/addMovieTelugu', async (req, res) => {
+let addMovieCb = async (req, res) => {
     let msg = new TeluguModel(req.body);
     const result23 = await msg.save().then(doc => {
         console.log(doc);
@@ -115,10 +118,9 @@ router.put('/addMovieTelugu', async (req, res) => {
     });
     if(result23) res.send('hittu, movie added');
     else res.send('phatttuuu');
-});
+}
 
-
-router.get('/heroHeroine/:movie23', async (req, res) => {
+let heroHeroineCb = async (req, res) => {
     console.log(req.params.movie23);
     const queryResult = await TeluguModel.findOne({
         'name': req.params.movie23                        // searches in 'name' field in teluguSchema
@@ -129,10 +131,9 @@ router.get('/heroHeroine/:movie23', async (req, res) => {
     res.send(queryResult);
     // if(queryResult) res.send({res23: queryResult});
     // else res.send('po ra rei');
-});
+}
 
-// Not WORKINGGGGGGGGGGGGGG
-router.get('/updateMovie/:movie23', async (req, res) => {
+let updateMovieCb = async (req, res) => {
     const queryResult = await TeluguModel.findOne({
         'name': req.params.movie23
     }).then(doc => {
@@ -141,7 +142,20 @@ router.get('/updateMovie/:movie23', async (req, res) => {
     }).catch(err => {console.log(err); return null});
     if(queryResult) res.send(queryResult);
     else res.send('poyindi');
-});
+}
+
+/***************************** MOVIES ***************************************/
+router.put('/addMovieTelugu', addMovieCb);
+router.get('/heroHeroine/:movie23', heroHeroineCb);
+router.get('/updateMovie/:movie23', updateMovieCb);             // Not WORKINGGGGGGGGGGGGGG
+
+
+/***************************** REAL MADRID ****************************************/
+
+router.put('/addPlayer', addPlayerCb);
+router.put('/updatePlayer', updatePlayerCb);
+router.put('/searchRM', searchRMCb)
+
 /***************************************************************************/
 
 
