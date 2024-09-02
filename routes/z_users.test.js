@@ -20,11 +20,14 @@ describe('Users Route Testing', () => {
 describe("testing GET Todos23", () => {
     const newTodo1 = { id: 12, item: "Drink water", completed: false };
     const newTodo2 = { id: 13, item: "start eating", completed: false };
+    
     beforeAll(async () => { 
         await request(baseURL).post("/users/todos").send(newTodo1); 
         await request(baseURL).post("/users/todos").send(newTodo2); 
     });
+
     afterAll(async () => { await request(baseURL).delete(`/users/todos`); });
+
     it("statusCode23 = 200", async () => {
         const response = await request(baseURL).get("/users/todos");
         console.log(response.body);
@@ -32,6 +35,7 @@ describe("testing GET Todos23", () => {
         expect(response.body.error).toBe(null);
         expect(response.body.data.length >= 1).toBe(true);
     });
+
     it("should return todos", async () => {
         const response = await request(baseURL).get("/users/todos/1");
         // console.log(response.body);
