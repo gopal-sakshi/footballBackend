@@ -10,6 +10,43 @@ var dynamoClient = require("../config/dynamo-config")
 /********************************* METHODS ******************** */
 
 
+/*
+    partition key
+    - is used for partitioning the data. 
+    - Data with the same partition key is stored together
+    - which allows you to query data with the same partition key in 1 query.
+
+    sort key
+    - determines the order of how data with the same partition key is stored. 
+    - Using a clever sort key allows you to query many items in 1 query.
+*/
+
+router.post('/createTable', (req, res) => {
+    let params23 = {
+        TableName: "fb_playersTable",
+        KeySchema: [
+            { AttributeName: "name", KeyType: "HASH"},  //Partition key
+            { AttributeName: "position", KeyType: "RANGE" }  //Sort key
+        ],
+        AttributeDefinitions: [
+            { AttributeName: "name", AttributeType: "S" },
+            { AttributeName: "position", AttributeType: "S" }
+        ],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 10,
+            WriteCapacityUnits: 10
+        }
+    };
+    dynamoClient.createTable(params23, function(tableErr, tableData) {
+        if (tableErr) {
+            console.error("Error JSON:", JSON.stringify(tableErr, null, 2));
+        } else {
+            console.log("Created table successfully! ", JSON.stringify(tableData));
+        }
+        res.send({ info23: "table create ayindi aa ", time23: Date.now(), tableInfo: tableData})
+    })
+});
+
 
 /** display all players */
 router.get('/', function(req, res) {

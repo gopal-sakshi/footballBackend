@@ -1,3 +1,11 @@
+/*
+    the first time you call require(‘mongoose’), 
+    it is creating an instance of the Mongoose class and returning it. 
+    On subsequent calls, it will return the same instance that was created and returned to you the first time 
+    because of how module import/export works in ES6.... module is CACHEDDDDDDDDDDD
+*/
+
+
 var mongoose = require('mongoose');
 const server = '127.0.0.1:27017';
 const database = 'movies23';
