@@ -6,30 +6,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
 const sum12 = require('./routes/maths11');
-
-// It seems connection must happen at app.js level only
-    // It seems connection need not happen at app.js level
-// var mongoose = require('mongoose');
-// var mongoString = require("./config/mongo-config");
-// mongoose.connect(mongoString, { useNewUrlParser: true , useUnifiedTopology: true});
 /************************* end of IMPORTS *************************** */
 
 
 
 /********************** SUB ROUTES ***********************/
-var indexRouter = require('./routes/z_index');
-var usersRouter = require('./routes/z_users');
-var playersRouter = require('./routes/players_dynamo_aws');
-var footballersRouter = require('./routes/footballers_dynamo_local');
-var playersInS3Router = require('./routes/players_s3_aws');
-var teamsRouter = require('./routes/teams_dynamo_aws');
+var todosRouter = require('./routes/todos');
 var squadsRouter = require('./routes/clubSquad_postgres');
 var userInputRouter = require('./routes/z_userInput');
 var firebaseRouter = require('./routes/firebaseRouter');
 var triggerRouter = require('./routes_trigger23/blah1');
-var mongo23 = require('./routes_mongo/mongo23');
-var mongo24 = require('./routes_mongo/mongo24');
-// var sequelizeRouter = require('./routes_sequelize/sequelize_postgres');
 // var redisRouter = require('./routes/email23_redis');
 /********************** END OF SUB ROUTES ***********************/
 
@@ -81,28 +67,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /*************************** register sub routes ******************************/
-
-app.use('/playersInS3', playersInS3Router);         // AWS S3 bucket = gopal612-football-backend-acl
-// app.use('playersInS3', playersInS3Router);       // struggled 30min... because playersInS3 didnt have backslash... 
-app.use('/squads', squadsRouter);                   // fetch squads from 'football database' --- postgres local
-app.use('/players', playersRouter);                 // 'fb_playersTable' ---- AWS dynamo
-app.use('/teams', teamsRouter);                     // 'fb_teamsTable' -------- AWS dynamo
-app.use('/footballers', footballersRouter);         // 'footballers' table ----- dynamo local
-
-// submit & form... and get the response ------ WORKING
+app.use('/squads', squadsRouter);
 app.use('/userInput', (req, res, next) => { req['sumResult'] = sum12(3,4); next(); }, userInputRouter);
-
-app.use('/', indexRouter);                          // check to see how 'view engine' works
-app.use('/users', usersRouter);                     // just another endpoint... not much use now...
+app.use('/todos23', todosRouter);
 app.use('/firebase', firebaseRouter);
 app.use('/trigger23', triggerRouter);
-
-// commenting mongoRoutes... uncomment only when mongo_server is running... 
-// RUN THE DOCKER CONTAINERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-// otherwise app crashes, coz it cant connect to mongo_server
-app.use('/mongoRoutes23', mongo23);
-app.use('/mongoRoutes24', mongo24);
-// app.use('/sequelize', sequelizeRouter);
+app.use('/', (req, res, next) => { res.render('index', { title: 'Express' }); });       // see index.jade
 // app.use('/redis23', redisRouter);
 /*************************** end of register sub routes ******************************/
 

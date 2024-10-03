@@ -1,46 +1,40 @@
 {
-  "name": "footballbackend",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "nodemon ./bin/www",
-    "dynamo_local_windows": "cd \"C:\\Users\\gopal\\Downloads\\dynamodb_local_latest\" && java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb -port 8002",
-    "readMe": "nodemon is one junk thingy... or I dont know how to use it... never ever use it",
-    "use_this": "node ./bin/www",
-    "test12": "jest",
-    "dynamoGui": "SET DYNAMO_ENDPOINT=http://localhost:8002 && dynamodb-admin",
-    "dynamoDocker": "SET DYNAMO_ENDPOINT=http://localhost:49003 && dynamodb-admin",
-    "dynamoDocker1": "SET DYNAMO_ENDPOINT=http://localhost:49003 && SET AWS_REGION=us-east-2 && SET AWS_ACCESS_KEY_ID=chanti_gadu_local && SET AWS_SECRET_ACCESS_KEY=idiot_movie && dynamodb-admin"
-  },
-  "dependencies": {
-    "aws-sdk": "^2.1654.0",
-    "axios": "^1.7.2",
-    "body-parser": "~1.20.2",
-    "cookie-parser": "~1.4.6",
-    "cors": "^2.8.5",
-    "debug": "~4.3.5",
-    "dynamodb-admin": "^4.6.1",
-    "ejs": "^3.1.10",
-    "express": "~4.19.2",
-    "firebase-admin": "^12.2.0",
-    "http-errors": "~2.0.0",
-    "jade": "~1.11.0",
-    "mongoose": "^8.4.4",
-    "morgan": "~1.10.0",
-    "multer": "^1.4.5-lts.1",
-    "newman": "^6.1.3",
-    "node-uuid": "^1.4.8",
-    "nodemon": "^3.1.4",
-    "pg": "^8.12.0",
-    "redis": "^4.6.15",
-    "sequelize": "^6.37.3",
-    "sequelize-cli": "^6.6.2",
-    "serve-favicon": "~2.5.0",
-    "uuid": "^10.0.0",
-    "validator": "^13.12.0"
-  },
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "supertest": "^7.0.0"
-  }
+    "name": "footballbackend",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "nodemon ./bin/www",
+        "test12": "jest"
+    },
+    "dependencies": {
+        "aws-sdk": "^2.1654.0",
+        "axios": "^1.7.2",
+        "body-parser": "~1.20.2",
+        "cookie-parser": "~1.4.6",
+        "cors": "^2.8.5",
+        "debug": "~4.3.5",
+        "dynamodb-admin": "^4.6.1",
+        "ejs": "^3.1.10",
+        "express": "~4.19.2",
+        "firebase-admin": "^12.2.0",
+        "http-errors": "~2.0.0",
+        "jade": "~1.11.0",
+        "mongoose": "^8.4.4",
+        "morgan": "~1.10.0",
+        "multer": "^1.4.5-lts.1",
+        "newman": "^6.1.3",
+        "node-uuid": "^1.4.8",
+        "nodemon": "^3.1.4",
+        "pg": "^8.12.0",
+        "redis": "^4.6.15",
+        "sequelize": "^6.37.3",
+        "sequelize-cli": "^6.6.2",
+        "serve-favicon": "~2.5.0",
+        "uuid": "^10.0.0",
+        "validator": "^13.12.0"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^7.0.0"
+    }
 }

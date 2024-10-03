@@ -6,8 +6,8 @@ var path = require("path");
 var admin = require("firebase-admin");
 var serviceAccount = require('../config/firebase-admin-config.json');
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),  
-  databaseURL: "https://gopal61288-01.firebaseio.com",
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://gopal61288-01.firebaseio.com",
 });
 const firestore = admin.firestore();
 /************************************************************* */
@@ -20,11 +20,11 @@ router.post('/send', async (req, res) => {
             .collection('football_clubs')
             .doc('Barcelona')
             .set(newData)
-            .then( data => { console.log(data) })
+            .then(data => { console.log(data) })
     } catch (error) {
         console.log(error)
     }
-    res.status(200).send({res: 'firebase send'});
+    res.status(200).send({ res: 'firebase send' });
 });
 
 
