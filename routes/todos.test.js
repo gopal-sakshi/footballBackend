@@ -1,15 +1,15 @@
 const request = require('supertest');
 const express = require('express');
-const userRoutes = require('./z_users');
+const todoRoutes = require('./todos');
 const baseURL = 'localhost:3050'
 const app = express();
 app.use(express.json());
-app.use('/users', userRoutes);
+app.use('/todos23', todoRoutes);
 
-describe('Users Route Testing', () => {
+describe('todos Route Testing', () => {
     it('test11', async()  => {
         const res = await request(app)                          // request(app)         vs      // request(baseURL)
-            .get('/users/base23')
+            .get('/todos23/base23')
             .set('Content-Type', 'application/json')
             .send({name:'name12', password:'pass12'});
         expect(res.statusCode).toEqual(202)
@@ -22,14 +22,14 @@ describe("testing GET Todos23", () => {
     const newTodo2 = { id: 13, item: "start eating", completed: false };
     
     beforeAll(async () => { 
-        await request(baseURL).post("/users/todos").send(newTodo1); 
-        await request(baseURL).post("/users/todos").send(newTodo2); 
+        await request(baseURL).post("/todos23/todos").send(newTodo1); 
+        await request(baseURL).post("/todos23/todos").send(newTodo2); 
     });
 
-    afterAll(async () => { await request(baseURL).delete(`/users/todos`); });
+    afterAll(async () => { await request(baseURL).delete(`/todos23/todos`); });
 
     it("statusCode23 = 200", async () => {
-        const response = await request(baseURL).get("/users/todos");
+        const response = await request(baseURL).get("/todos23/todos");
         console.log(response.body);
         expect(response.statusCode).toBe(200);
         expect(response.body.error).toBe(null);
@@ -37,7 +37,7 @@ describe("testing GET Todos23", () => {
     });
 
     it("should return todos", async () => {
-        const response = await request(baseURL).get("/users/todos/1");
+        const response = await request(baseURL).get("/todos23/todos/1");
         // console.log(response.body);
         expect(response.body.data).toBeDefined();
     });
@@ -45,9 +45,9 @@ describe("testing GET Todos23", () => {
 
 // describe("POST /todo", () => {
 //     const newTodo = { id: 14, item: "watch football", completed: false };
-//     afterAll(async () => { await request(baseURL).delete(`/users/todos`) });
+//     afterAll(async () => { await request(baseURL).delete(`/todos/todos`) });
 //     it("should add an item to todos array", async () => {
-//         const response = await request(baseURL).post("/users/todos").send(newTodo);
+//         const response = await request(baseURL).post("/todos/todos").send(newTodo);
 //         // console.log(response.body);
 //         const lastItem = response.body.data[response.body.data.length-1];
 //         expect(response.statusCode).toBe(201);
