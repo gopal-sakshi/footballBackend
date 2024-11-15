@@ -9,18 +9,6 @@ const sum12 = require('./routes/maths11');
 /************************* end of IMPORTS *************************** */
 
 
-
-/********************** SUB ROUTES ***********************/
-var todosRouter = require('./routes/todos');
-var squadsRouter = require('./routes/clubSquad_postgres');
-var userInputRouter = require('./routes/z_userInput');
-var firebaseRouter = require('./routes/firebaseRouter');
-var triggerRouter = require('./routes_trigger23/blah1');
-// var redisRouter = require('./routes/email23_redis');
-/********************** END OF SUB ROUTES ***********************/
-
-
-
 /****************** CORS stuff ******************************/
 app.use(function (req, res, next) {
 
@@ -67,13 +55,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /*************************** register sub routes ******************************/
+
+var todosRouter = require('./routes/todos');
+var squadsRouter = require('./routes/clubSquad_postgres');
+var userInputRouter = require('./routes/z_userInput');
+var firebaseRouter = require('./routes/firebaseRouter');
+var triggerRouter = require('./routes_trigger23/blah1');
+
+
 app.use('/squads', squadsRouter);
 app.use('/userInput', (req, res, next) => { req['sumResult'] = sum12(3,4); next(); }, userInputRouter);
 app.use('/todos23', todosRouter);
 app.use('/firebase', firebaseRouter);
 app.use('/trigger23', triggerRouter);
 app.use('/', (req, res, next) => { res.render('index', { title: 'Express' }); });       // see index.jade
+
+console.log("=========== redis disabled =========== ")
+// var redisRouter = require('./routes/email23_redis');
 // app.use('/redis23', redisRouter);
+
+
 /*************************** end of register sub routes ******************************/
 
 
